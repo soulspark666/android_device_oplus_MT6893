@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_MT6893.mk
+    $(LOCAL_DIR)/voltage_MT6893.mk
