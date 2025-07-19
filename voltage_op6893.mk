@@ -34,3 +34,14 @@ PRODUCT_MANUFACTURER := Oplus
 # Build info
 PRODUCT_BUILD_PROP_OVERRIDES := BuildDesc=$(call normalize-path-list, "sys_mssi_64_cn_armv82-user-13-TP1A.220905.001-1677828988354-release-keys")
 PRODUCT_GMS_CLIENTID_BASE := android-oplus
+
+# Voltage Extra
+EXTRA_UDFPS_ANIMATIONS := true
+
+# GMS space alot
+WITH_GMS := true
+BOARD_PRODUCTIMAGE_MINIMAL_PARTITION_RESERVED_SIZE := false
+PRODUCT_IS_ATV := false
+
+# Remove Build Warning
+TARGET_BOOT_ANIMATION_RES := 1920
