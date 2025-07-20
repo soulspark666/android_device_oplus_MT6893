@@ -193,6 +193,5 @@ WIFI_DRIVER_STATE_OFF := 0
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 
-# Lineage Health
-TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/devices/virtual/oplus_chg/battery/mmi_charging_enable
-
+# Health
+$(call soong_config_set,lineage_health,charging_control_charging_path,/sys/devices/virtual/oplus_chg/battery/mmi_charging_enable)
