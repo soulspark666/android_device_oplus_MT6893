@@ -1,0 +1,5 @@
+# Device-specific extensions for MTK HAL C2 (Codec 2.0)
+# Allow mtk_hal_c2 to read default properties
+allow mtk_hal_c2 default_prop:file read;
+# Allow mtk_hal_c2 to read boot mode from sysfs
+allow mtk_hal_c2 sysfs_boot_mode:file read;

@@ -4,3 +4,5 @@ vendor_internal_prop(vendor_audio_prop)
 vendor_internal_prop(vendor_device_prop)
 
 vendor_public_prop(vendor_oplus_prop)
+# USB UVC property
+vendor_public_prop(vendor_usb_uvc_enabled_prop)

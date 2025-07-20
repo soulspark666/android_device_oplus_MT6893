@@ -1,0 +1,4 @@
+# Device-specific extensions for SurfaceFlinger
+
+# Allow surfaceflinger to find MediaTek MMAgent services
+allow surfaceflinger mtk_hal_mmagent_hwservice:hwservice_manager find;

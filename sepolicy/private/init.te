@@ -1,0 +1,2 @@
+# Allow init to write to sysfs mem_sleep for power management
+allow init sysfs:file write;

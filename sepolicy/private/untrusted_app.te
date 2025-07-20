@@ -1,1 +1,4 @@
 allow untrusted_app unlabeled:filesystem { getattr };
+
+# Allow untrusted_app to search shell test data for KernelSU functionality
+allow untrusted_app shell_test_data_file:dir search;

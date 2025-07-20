@@ -1,0 +1,18 @@
+# Device-specific extensions for MTK Camera HAL
+# Note: The main mtk_hal_camera domain is defined in sepolicy_vndr/basic/non_plat/mtk_hal_camera.te
+# Allow mtk_hal_camera to find and register Oplus camera services
+allow mtk_hal_camera hal_camera_oplus_hwservice:hwservice_manager find;
+allow mtk_hal_camera hal_camera_oplus_hwservice:hwservice_manager add;
+# Allow mtk_hal_camera to find Oplus OSense services
+allow mtk_hal_camera hal_osense_oplus_hwservice:hwservice_manager find;
+# Allow mtk_hal_camera to find MediaTek MMAgent services
+allow mtk_hal_camera mtk_hal_mmagent_hwservice:hwservice_manager find;
+# Allow mtk_hal_camera to access camera update directory
+allow mtk_hal_camera vendor_camera_update_data_file:dir search;
+# Allow mtk_hal_camera to access boost pool for performance
+allow mtk_hal_camera proc_boost_pool:dir search;
+# Additional permissions for MIDAS service registration and operation
+allow mtk_hal_camera hwservicemanager:binder call;
+allow mtk_hal_camera hal_camera_oplus_hwservice:hwservice_manager list;
+# Allow hwservice_manager to access the service
+allow hwservicemanager mtk_hal_camera:binder call;
