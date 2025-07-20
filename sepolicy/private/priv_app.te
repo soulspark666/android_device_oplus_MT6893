@@ -1,0 +1,7 @@
+# Device-specific extensions for privileged apps
+# Allow Google Play Services to access checkin data
+# This is required for Google services functionality
+allow priv_app checkin_data_file:dir search;
+# Allow Google Play Services to read network information
+# This is required for network connectivity checks
+allow priv_app sysfs_net:dir read;

@@ -1,0 +1,9 @@
+# Device-specific extensions for CLATD (Carrier-grade NAT)
+# Allow clatd to read vendor files for network configuration
+allow clatd vendor_file:dir read;
+# Allow clatd to search shell data directories
+allow clatd shell_data_file:dir search;
+# Allow clatd to search shell test data directories
+allow clatd shell_test_data_file:dir search;
+# Allow clatd to read system data root
+allow clatd system_data_root_file:dir read;

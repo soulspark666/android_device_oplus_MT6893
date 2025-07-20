@@ -1,0 +1,6 @@
+# Device-specific kernel extensions
+
+# Allow kernel to access ADB data directory during debugging
+# Note: This is primarily for development/debugging purposes
+# Consider removing in production builds for enhanced security
+allow kernel adb_data_file:dir search;

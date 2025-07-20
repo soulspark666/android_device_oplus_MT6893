@@ -1,0 +1,4 @@
+# Device-specific extensions for VPU Native (Video Processing Unit)
+
+# Allow vpud_native to read default properties
+allow vpud_native default_prop:file read;
