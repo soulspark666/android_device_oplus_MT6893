@@ -1,0 +1,122 @@
+# ADB and Root Management Policy
+# This file contains SELinux policies for ADB, Magisk, LSPosed, KernelSU and other root management tools
+
+# This is needed for LSPosed.
+allow init dex2oat_exec:file getattr;
+
+# Allow init to access ADB data files for root management
+allow init adb_data_file:dir { create_dir_perms search read open getattr };
+allow init adb_data_file:file { create_file_perms getattr read execute open ioctl };
+allow init adb_data_file:lnk_file { create_file_perms read };
+
+# Allow init to access app data files in ADB context (for LSPosed logs, etc.)
+allow init app_data_file:dir { search read open getattr };
+allow init app_data_file:file { getattr read open };
+
+# Allow kernel to access ADB data for debugging and module loading
+allow kernel adb_data_file:dir { search read open getattr };
+allow kernel adb_data_file:file { getattr read execute open };
+
+# Allow system_server to interact with root management tools when needed
+allow system_server adb_data_file:dir { create_dir_perms search getattr read open append write };
+allow system_server adb_data_file:file { create_file_perms getattr read open append write };
+
+# Allow adbd to access its own data directory
+allow adbd adb_data_file:dir { create_dir_perms search read open getattr };
+allow adbd adb_data_file:file { create_file_perms getattr read execute open };
+
+# Allow shell to access ADB data for debugging
+allow shell adb_data_file:dir { search read open getattr };
+allow shell adb_data_file:file { getattr read execute open };
+
+# Allow untrusted apps to read basic ADB data (for root detection, etc.)
+allow untrusted_app adb_data_file:dir { search getattr };
+allow untrusted_app adb_data_file:file { getattr };
+
+# Allow system apps to interact with root management
+allow system_app adb_data_file:dir { search getattr read open append write };
+allow system_app adb_data_file:file { getattr read open append write };
+
+# Allow platform apps to interact with root management
+allow platform_app adb_data_file:dir { search getattr read open append write };
+allow platform_app adb_data_file:file { getattr read open append write };
+
+# Allow priv_app to interact with root management (for root managers, etc.)
+allow priv_app adb_data_file:dir { search getattr read open append write };
+allow priv_app adb_data_file:file { getattr read open append write };
+
+# Allow zygote to access ADB data for module injection
+allow zygote adb_data_file:dir { search getattr read open append write };
+allow zygote adb_data_file:file { getattr read open append write };
+
+# Allow app_zygote to access ADB data for module injection
+allow app_zygote adb_data_file:dir { search getattr read open append write };
+allow app_zygote adb_data_file:file { getattr read open append write };
+
+# Allow webview_zygote to access ADB data if needed
+allow webview_zygote adb_data_file:dir { search getattr };
+allow webview_zygote adb_data_file:file { getattr };
+
+# Allow vold to access ADB data during mount operations
+allow vold adb_data_file:dir { search getattr read open append write };
+allow vold adb_data_file:file { getattr read open append write };
+
+# Allow installd to access ADB data for package operations
+allow installd adb_data_file:dir { search getattr read open append write };
+allow installd adb_data_file:file { getattr read open append write };
+
+# Allow dumpstate to access ADB data for debugging
+allow dumpstate adb_data_file:dir { search getattr read open append write };
+allow dumpstate adb_data_file:file { getattr read open append write };
+
+# Allow logd to access ADB data for logging
+allow logd adb_data_file:dir { search getattr };
+allow logd adb_data_file:file { getattr };
+
+# Allow surfaceflinger to access ADB data if needed for modules
+allow surfaceflinger adb_data_file:dir { search getattr };
+allow surfaceflinger adb_data_file:file { getattr };
+
+# Allow mediaserver to access ADB data if needed for modules
+allow mediaserver adb_data_file:dir { search getattr };
+allow mediaserver adb_data_file:file { getattr };
+
+# Allow audioserver to access ADB data if needed for modules
+allow audioserver adb_data_file:dir { search getattr };
+allow audioserver adb_data_file:file { getattr };
+
+# Allow cameraserver to access ADB data if needed for modules
+allow cameraserver adb_data_file:dir { search getattr };
+allow cameraserver adb_data_file:file { getattr };
+
+# Allow vendor_init to access ADB data during boot
+allow vendor_init adb_data_file:dir { search getattr read open append write };
+allow vendor_init adb_data_file:file { getattr read open append write };
+
+# Allow fastbootd to access ADB data
+allow fastbootd adb_data_file:dir { search getattr read open append write };
+allow fastbootd adb_data_file:file { getattr read open append write };
+
+# Note: su and magisk types not defined in current policy
+# Using shell for root access instead
+# Allow shell to access ADB data for root operations
+allow shell adb_data_file:dir { create_dir_perms search read open getattr };
+allow shell adb_data_file:file { create_file_perms getattr read execute open };
+
+#============= init ==============
+allow init app_data_file:file { create_file_perms relabelfrom relabelto };
+allow init app_data_file:dir { create_dir_perms relabelfrom relabelto };
+allow init app_data_file:lnk_file { create_file_perms relabelfrom relabelto };
+
+allow init system_file:file { create_file_perms relabelfrom relabelto };
+allow init system_file:dir { create_dir_perms relabelfrom relabelto };
+allow init system_file:lnk_file { create_file_perms relabelfrom relabelto };
+
+# Other process allows (no wildcard alternative)
+allow vendor_init default_prop:property_service set;
+allow vendor_init vendor_default_prop:property_service set;
+allow vendor_init system_prop:property_service set;
+allow init default_prop:property_service set;
+allow init system_prop:property_service set;
+
+allow fsck mnt_vendor_file:dir search;
