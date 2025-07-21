@@ -1,0 +1,14 @@
+# Allow vendor_init domain to set default properties (addresses ro.*/pm.* property denials)
+allow vendor_init default_prop:property_service set;
+
+# Allow fsck to search and interact with /mnt/vendor (fixes mnt_vendor_file denials)
+allow fsck mnt_vendor_file:dir search;
+
+# Allow init to execute vendor ADB-related files
+allow init adb_data_file:file { execute execute_no_trans };
+
+# Audioserver/media domains access to vendor_default_prop
+allow audioserver vendor_default_prop:file { read open getattr map };
+
+# General all-domain property set/read for debugging (not for production)
+# allow * default_prop:property_service { read set };
